@@ -100,8 +100,10 @@ while cap.isOpened():
 
                     # Map gesture to key press
                     if fingers_up == 1:
-                        print("Pressing Windows key")
-                        pyautogui.press('winleft')  # Simulates pressing the Windows key
+                        print("Pressing hotkey")
+                        #pyautogui.press('winleft')  # Simulates pressing the Windows key\
+                        # linkedin hotkey : Ctrl + Shift + Alt + Windows + L
+                        pyautogui.hotkey('ctrl', 'shift', 'alt', 'winleft', 'l')
 
                     gesture_recognized = True
                     cooldown_active = True

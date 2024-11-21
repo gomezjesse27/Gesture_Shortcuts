@@ -92,8 +92,14 @@ while cap.isOpened():
 
                     # Map gesture to user-defined key press
                     if fingers_up in gesture_mappings:
-                        pyautogui.press(gesture_mappings[fingers_up])
-                        print(f"Pressing {gesture_mappings[fingers_up]}")
+                        mapping = gesture_mappings[fingers_up]
+                        if mapping['type'] == 'single':
+                            pyautogui.press(mapping['keys'][0])  # Single key
+                            print(f"Pressing single key: {mapping['keys'][0]}")
+                        elif mapping['type'] == 'hotkey':
+                            pyautogui.hotkey(*mapping['keys'])  # Hotkey
+                            print(f"Pressing hotkey: {'+'.join(mapping['keys'])}")
+
 
                     gesture_recognized = True
                     cooldown_active = True
