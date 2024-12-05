@@ -12,7 +12,7 @@ KEY_TRANSLATION_MAP = {
     'Control_R': 'ctrl',
     'Shift_R': 'shift',
     'Alt_R': 'alt',
-    'Return': 'enter',
+    'Return': 'enter', 
     'Space': 'space',
     'Tab': 'tab',
     'BackSpace': 'backspace',
@@ -73,6 +73,7 @@ def launch_ui():
         translated_key = KEY_TRANSLATION_MAP.get(key, key.lower())
         var.set(translated_key)
         return "break"  #prevent propagation of the event
+
 
 
     def update_hotkey_fields(fingers):
