@@ -113,7 +113,7 @@ def recognize_custom_gesture(landmarks):
         if avg_dist < best_dist:
             best_dist = avg_dist
             best_gesture = g_name
-    if best_dist < 0.4: # threshold
+    if best_dist < 0.2: # threshold .2 works well
         return best_gesture
     return None
 
@@ -423,14 +423,14 @@ def count_fingers(hand_landmarks):
     ]
 
     fingers_up = 0
-    thumb_tip = hand_landmarks.landmark[mp.solutions.hands.HandLandmark.THUMB_TIP]
+    """thumb_tip = hand_landmarks.landmark[mp.solutions.hands.HandLandmark.THUMB_TIP]
     thumb_ip = hand_landmarks.landmark[mp.solutions.hands.HandLandmark.THUMB_IP]
     thumb_mcp = hand_landmarks.landmark[mp.solutions.hands.HandLandmark.THUMB_MCP]
     wrist = hand_landmarks.landmark[mp.solutions.hands.HandLandmark.WRIST]
 
     # Check thumb
     if thumb_tip.x < thumb_ip.x if wrist.x < thumb_mcp.x else thumb_tip.x > thumb_ip.x:
-        fingers_up += 1
+        fingers_up += 1"""
 
     # Check other fingers
     for tip, pip in zip(finger_tips, finger_pips):
@@ -455,6 +455,7 @@ def main_capture_loop():
     cap = cv2.VideoCapture(0)
     gesture_start_time = None
     gesture_text = "No Gesture Detected"
+    Instruction = "Press 'q' to quit, 't' to go back to UI"
     last_fingers_up = -1
 
     COOLDOWN_TIME = 2.0
@@ -530,6 +531,7 @@ def main_capture_loop():
         if gesture_text:
             cv2.putText(frame, gesture_text, (frame.shape[1] - 300, 50),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2)
+        cv2.putText(frame, Instruction, (10, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2)
 
         cv2.imshow('Hand Tracking', frame)
 
