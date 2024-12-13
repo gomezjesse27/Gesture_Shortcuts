@@ -431,8 +431,11 @@ def count_fingers(hand_landmarks):
     # Check thumb
     if thumb_tip.x < thumb_ip.x if wrist.x < thumb_mcp.x else thumb_tip.x > thumb_ip.x:
         fingers_up += 1"""
+    # we will ignore thumb for now, its not worth the glitchy behavior 
+    # #maybe we can come back to it another time but I think 4 predefined gestures is more than enough
 
-    # Check other fingers
+
+    # Check other fingers 
     for tip, pip in zip(finger_tips, finger_pips):
         if hand_landmarks.landmark[tip].y < hand_landmarks.landmark[pip].y:
             fingers_up += 1
